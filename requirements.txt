@@ -1,0 +1,14 @@
+# Detección + tracking (YOLO, ByteTrack). Versión fijada = la usada en Colab:
+# los valores por defecto de bytetrack.yaml dependen de la versión.
+ultralytics==8.4.174
+lap>=0.5.12          # asignación húngara que usa ByteTrack
+
+# Vídeo, datos y gráficas
+opencv-python
+numpy
+pandas
+matplotlib
+
+# Notebooks en VS Code
+ipykernel
+ipython
