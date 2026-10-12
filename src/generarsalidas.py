@@ -1,6 +1,5 @@
 from videodata import leer_frames
 import cv2
-from IPython.display import Video, display
 
 COLORES = {2: (0, 255, 0), 3: (255, 0, 255), 5: (0, 165, 255), 7: (0, 0, 255)}  # BGR: coche verde, camión rojo
 

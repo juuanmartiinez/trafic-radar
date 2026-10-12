@@ -1,23 +1,19 @@
 import cv2
 
-FRAMES_POR_SEGUNDO = 100
-
 def leer_frames(rutaVideo, tInicio, tFinal):
     cap = cv2.VideoCapture(rutaVideo)
     assert cap.isOpened()
-    
-    frameInicio = round(tInicio * FRAMES_POR_SEGUNDO)
-    frameFinal = round(tFinal * FRAMES_POR_SEGUNDO)
 
-    cap.set(cv2.CAP_PROP_POS_FRAMES, frameInicio)
+    cap.set(cv2.CAP_PROP_POS_MSEC, tInicio * 1000)
 
-    for i in range(frameInicio, frameFinal):
+    while True:
         ok, frame = cap.read()
-
         if not ok:
-          break
-
-        yield i, i / FRAMES_POR_SEGUNDO, frame
+            break
+        t = cap.get(cv2.CAP_PROP_POS_MSEC) / 1000
+        if t > tFinal:
+            break
+        yield round(t * 50), t, frame
 
     cap.release()
 
