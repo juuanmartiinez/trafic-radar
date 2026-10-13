@@ -62,20 +62,3 @@ def lineas_medida(gt, ancho=1920):
         a, b, c = gt["measurementLines"][i]
         alturas.append(-(a * xs + c) / b)
     return alturas[0], alturas[1]
-
-def tiempo_entre_lineas(tray, ln4, ln0):
-
-    t4 = t0 = None
-
-    for fila in tray.itertuples():
-        x = int((fila.x1 + fila.x2) / 2)         
-
-        if t4 is None and fila.y2 >= ln4[x]:
-            t4 = fila.t
-        if t0 is None and fila.y2 >= ln0[x]:
-            t0 = fila.t
-        
-    if t4 is None or t0 is None:
-        return None
-
-    return (t0 - t4)
