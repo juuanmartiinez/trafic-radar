@@ -30,23 +30,20 @@ def calibrar_distancia(gt, t_max=1200):
             distancias.append(c["speed"] / 3.6 * dt)
     return np.median(distancias)
 
-def velocidades_clip(df, gt, ln4, ln0):
-  resultados = []
+def velocidades_clip(df, D, ln4, ln0):
+    resultados = []
 
-  D = calibrar_distancia(gt)
+    for coche, tray in df[df["id"] >= 0].groupby("id"):
+        tray = tray.sort_values("frame")
+        cruces = tiempo_entre_lineas(tray, ln4, ln0)
 
+        if cruces is None:
+            continue
 
-  for coche, tray in df[df["id"] >= 0].groupby("id"):
-      tray = tray.sort_values("frame")
-      cruces = tiempo_entre_lineas(tray, ln4, ln0)
+        t0, t4 = cruces
+        tiempo = t0 - t4
 
-      if cruces is None:
-        continue
+        if tiempo > 0:
+            resultados.append({"id": coche, "t4": t4, "tiempo": tiempo, "velocidad": D / tiempo * 3.6})
 
-      t0, t4 = cruces
-      tiempo = t0 - t4
-
-      if tiempo is not None and not tiempo == 0.0:
-          resultados.append({"id" : coche, "t4" : t4, "tiempo" : tiempo, "velocidad" : D / tiempo * 3.6})
-
-  return pd.DataFrame(resultados)
+    return pd.DataFrame(resultados)

@@ -16,4 +16,3 @@ def leer_frames(rutaVideo, tInicio, tFinal):
         yield round(t * 50), t, frame
 
     cap.release()
-

@@ -55,10 +55,10 @@ def detectar_clip(ruta, tInicio, tFinal, mask, clases=(2, 3, 5, 7)):
 
     return pd.DataFrame(filas)
 
-def lineas_medida(gt, ancho=1920):
+def lineas_medida(coef4, coef0, ancho=1920):
+    # altura (y) de cada línea de medida para cada columna x: a·x + b·y + c = 0
     xs = np.arange(ancho)
     alturas = []
-    for i in (4, 0):
-        a, b, c = gt["measurementLines"][i]
+    for a, b, c in (coef4, coef0):
         alturas.append(-(a * xs + c) / b)
     return alturas[0], alturas[1]

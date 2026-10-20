@@ -1,0 +1,7 @@
+{
+  "descripcion": "Calibración fija de la cámara de BrnoCompSpeed session2_center. Líneas a·x + b·y + c = 0 (gt['measurementLines'][4] y [0]); D = distancia real entre ellas en metros, calibrada con el bloque de ajuste (t < 1200 s).",
+  "linea4": [0.043360341265252504, 0.9990594981307973, -199.2203333156472],
+  "linea0": [0.060675463058575185, 0.9981575467743694, -882.3678069354769],
+  "D": 28.000038159997864,
+  "mascara": "video_mask.png"
+}
